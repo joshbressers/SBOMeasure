@@ -79,3 +79,5 @@ jump in and contribute. PRs are most welcome!
 - Create testcases (we will need a lot of these)
 - SPDX and CycloneDX parsing applications (Josh has started a go spdx
   parser on the josh-dev branch)
+- Setup a github actions for the repo. It will be a mono repo and will need
+  a nice way to automatically verify PRs
