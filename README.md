@@ -70,3 +70,12 @@ easily displayed. The sort of graph that is shown here would be friendly
 and nice
 https://www.rezilion.com/blog/log4j-blindspots-what-your-scanner-is-still-missing/
 
+# TODO
+Here is an incomplete list of things that need to be done. Feel free to
+jump in and contribute. PRs are most welcome!
+
+- Identify SBOM scanners. There are a lot of these
+- Document how to install and run an SBOM sanner
+- Create testcases (we will need a lot of these)
+- SPDX and CycloneDX parsing applications (Josh has started a go spdx
+  parser on the josh-dev branch)
