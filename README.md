@@ -64,3 +64,9 @@ specifically check for that.
 Ideally we will not need a parser for every scanner as they should be
 outputting in standard formats. A scanner that does not output SPDX or
 CycloneDX that is well formed should be considered a fail.
+
+We will need the ability to save the output data in a manner than can be
+easily displayed. The sort of graph that is shown here would be friendly
+and nice
+https://www.rezilion.com/blog/log4j-blindspots-what-your-scanner-is-still-missing/
+
