@@ -48,9 +48,11 @@ What are the various SBOM scanners and how will we run them?
 Ideally every scanner should get its own directory in this system that will
 allow for scripts to be written that can install and run the scanner.
 
-## Scanners we want to test
-[Dependency-Check](https://owasp.org/www-project-dependency-check/)
-[Syft](https://github.com/anchore/syft/)
+## Scanners to investigate
+
+- [Dependency-Check](https://owasp.org/www-project-dependency-check/)
+- [Syft](https://github.com/anchore/syft/)
+- [Tern](https://github.com/tern-tools/tern)
 
 # Output parsing
 
