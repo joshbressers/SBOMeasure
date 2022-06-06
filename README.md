@@ -51,6 +51,12 @@ allow for scripts to be written that can install and run the scanner.
 ## Scanners to investigate
 
 - [Dependency-Check](https://owasp.org/www-project-dependency-check/)
+- [FOSSology](https://github.com/fossology/fossology)
+- [npm-spdx](https://github.com/swinslow/npm-spdx)
+- [OSS Review Toolkit](https://github.com/oss-review-toolkit/ort)
+- [Quartermaster](https://github.com/QMSTR/qmstr)
+- [reuse](https://git.fsfe.org/reuse/tool)
+- [Scanode toolkit](https://github.com/nexB/scancode-toolkit)
 - [Syft](https://github.com/anchore/syft/)
 - [Tern](https://github.com/tern-tools/tern)
 
