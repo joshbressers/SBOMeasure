@@ -10,7 +10,7 @@
             "request": "launch",
             "mode": "auto",
             "program": "${fileDirname}",
-            "args": ["test-spdx.json"]
+            "args": ["test-data/test-spdx.json"]
         }
     ]
 }

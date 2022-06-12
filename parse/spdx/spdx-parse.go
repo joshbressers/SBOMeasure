@@ -52,4 +52,9 @@ func main() {
 	fmt.Printf("Document Namespace:    %s\n", doc.CreationInfo.DocumentNamespace)
 	fmt.Printf("SPDX Version:          %s\n", doc.CreationInfo.SPDXVersion)
 	fmt.Println(strings.Repeat("=", 80))
+
+	for _, element := range doc.Packages {
+		fmt.Printf("PackageName: %s\n", element.PackageName)
+		fmt.Printf("PakcageVersion: %s\n", element.PackageVersion)
+	}
 }
