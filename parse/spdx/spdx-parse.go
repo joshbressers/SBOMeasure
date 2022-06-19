@@ -8,12 +8,49 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
 	"strings"
 
 	"github.com/spdx/tools-golang/jsonloader"
 )
+
+// Let's make this not very smart to start. We'll just use an array of
+// package-version as the output
+
+type SomePackage struct {
+	PackageName    string `json:"PackageName"`
+	PackageVersion string `json:"PackageVersion"`
+}
+
+func contains(packages []SomePackage, p SomePackage) bool {
+	for _, v := range packages {
+		if v == p {
+			return true
+		}
+	}
+
+	return false
+}
+
+func load_test_json() []SomePackage {
+	// Load the json file named test-output.json
+	jsonFile, err := os.Open("test-output.json")
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer jsonFile.Close()
+	theJSON, _ := ioutil.ReadAll(jsonFile)
+
+	var p []SomePackage
+	if err := json.Unmarshal([]byte(theJSON), &p); err != nil {
+		panic(err)
+	}
+
+	return p
+}
 
 func main() {
 
@@ -52,4 +89,29 @@ func main() {
 	fmt.Printf("Document Namespace:    %s\n", doc.CreationInfo.DocumentNamespace)
 	fmt.Printf("SPDX Version:          %s\n", doc.CreationInfo.SPDXVersion)
 	fmt.Println(strings.Repeat("=", 80))
+
+	spdxPackages := make([]SomePackage, 0)
+	for _, i := range doc.Packages {
+		onePackage := SomePackage{i.PackageName, i.PackageVersion}
+		spdxPackages = append(spdxPackages, onePackage)
+	}
+
+	testPackages := load_test_json()
+
+	fmt.Println("\nSPDX Packages")
+	for _, i := range spdxPackages {
+		fmt.Printf("%s-%s\n", i.PackageName, i.PackageVersion)
+	}
+
+	fmt.Println("\nJSON Packages")
+
+	for _, i := range testPackages {
+		fmt.Printf("%s-%s\n", i.PackageName, i.PackageVersion)
+		if contains(spdxPackages, i) {
+			fmt.Println("-- Found")
+		} else {
+			fmt.Println("-- NOT Found")
+		}
+	}
+
 }

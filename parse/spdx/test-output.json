@@ -1,0 +1,6 @@
+[
+    {"PackageName": "BAD", "PackageVersion": "BAD"},
+    {"PackageName": "SBOMeasure/spdx-parse", "PackageVersion": "2a5bad67f4d9c4e053a97021b55e27e07335da85"},
+    {"PackageName": "github.com/spdx/tools-golang", "PackageVersion": "v0.3.0"},
+    {"PackageName": "github.com/spdx/tools-golang", "PackageVersion": "v0.3.0"}
+]
