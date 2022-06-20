@@ -1,4 +1,4 @@
-module SBOMeasure/spdx-parse
+module github.com/joshbressers/sbomeasure/spdx-parse
 
 go 1.18
 
