@@ -15,28 +15,11 @@ import (
 	"strings"
 
 	"github.com/spdx/tools-golang/jsonloader"
+
+	"github.com/joshbressers/sbomeasure/spdx-parse/pkgutils"
 )
 
-// Let's make this not very smart to start. We'll just use an array of
-// package-version as the output
-
-type OnePackage struct {
-	PackageName    string `json:"PackageName"`
-	PackageVersion string `json:"PackageVersion"`
-}
-
-// Figure out if a package is in an array of packages
-func contains(packages []OnePackage, p OnePackage) bool {
-	for _, v := range packages {
-		if v == p {
-			return true
-		}
-	}
-
-	return false
-}
-
-func load_test_json() []OnePackage {
+func load_test_json() []pkgutils.OnePackage {
 	// Load the json file named test-output.json
 	jsonFile, err := os.Open("test-output.json")
 	if err != nil {
@@ -45,7 +28,7 @@ func load_test_json() []OnePackage {
 	defer jsonFile.Close()
 	theJSON, _ := ioutil.ReadAll(jsonFile)
 
-	var p []OnePackage
+	var p []pkgutils.OnePackage
 	if err := json.Unmarshal([]byte(theJSON), &p); err != nil {
 		panic(err)
 	}
@@ -91,10 +74,10 @@ func main() {
 	fmt.Printf("SPDX Version:          %s\n", doc.CreationInfo.SPDXVersion)
 	fmt.Println(strings.Repeat("=", 80))
 
-	spdxPackages := make([]OnePackage, 0)
+	spdxPackages := make([]pkgutils.OnePackage, 0)
 	for _, i := range doc.Packages {
-		onePackage := OnePackage{i.PackageName, i.PackageVersion}
-		spdxPackages = append(spdxPackages, onePackage)
+		thePackage := pkgutils.OnePackage{PackageName: i.PackageName, PackageVersion: i.PackageVersion}
+		spdxPackages = append(spdxPackages, thePackage)
 	}
 
 	testPackages := load_test_json()
@@ -108,7 +91,7 @@ func main() {
 
 	for _, i := range testPackages {
 		fmt.Printf("%s-%s\n", i.PackageName, i.PackageVersion)
-		if contains(spdxPackages, i) {
+		if pkgutils.Contains(spdxPackages, i) {
 			fmt.Println("-- Found")
 		} else {
 			fmt.Println("-- NOT Found")
