@@ -20,12 +20,13 @@ import (
 // Let's make this not very smart to start. We'll just use an array of
 // package-version as the output
 
-type SomePackage struct {
+type OnePackage struct {
 	PackageName    string `json:"PackageName"`
 	PackageVersion string `json:"PackageVersion"`
 }
 
-func contains(packages []SomePackage, p SomePackage) bool {
+// Figure out if a package is in an array of packages
+func contains(packages []OnePackage, p OnePackage) bool {
 	for _, v := range packages {
 		if v == p {
 			return true
@@ -35,7 +36,7 @@ func contains(packages []SomePackage, p SomePackage) bool {
 	return false
 }
 
-func load_test_json() []SomePackage {
+func load_test_json() []OnePackage {
 	// Load the json file named test-output.json
 	jsonFile, err := os.Open("test-output.json")
 	if err != nil {
@@ -44,7 +45,7 @@ func load_test_json() []SomePackage {
 	defer jsonFile.Close()
 	theJSON, _ := ioutil.ReadAll(jsonFile)
 
-	var p []SomePackage
+	var p []OnePackage
 	if err := json.Unmarshal([]byte(theJSON), &p); err != nil {
 		panic(err)
 	}
@@ -90,9 +91,9 @@ func main() {
 	fmt.Printf("SPDX Version:          %s\n", doc.CreationInfo.SPDXVersion)
 	fmt.Println(strings.Repeat("=", 80))
 
-	spdxPackages := make([]SomePackage, 0)
+	spdxPackages := make([]OnePackage, 0)
 	for _, i := range doc.Packages {
-		onePackage := SomePackage{i.PackageName, i.PackageVersion}
+		onePackage := OnePackage{i.PackageName, i.PackageVersion}
 		spdxPackages = append(spdxPackages, onePackage)
 	}
 
