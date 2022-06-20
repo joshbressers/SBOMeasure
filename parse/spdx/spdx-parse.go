@@ -8,9 +8,8 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"io/ioutil"
+
 	"os"
 	"strings"
 
@@ -18,23 +17,6 @@ import (
 
 	"github.com/joshbressers/sbomeasure/spdx-parse/pkgutils"
 )
-
-func load_test_json() []pkgutils.OnePackage {
-	// Load the json file named test-output.json
-	jsonFile, err := os.Open("test-output.json")
-	if err != nil {
-		fmt.Println(err)
-	}
-	defer jsonFile.Close()
-	theJSON, _ := ioutil.ReadAll(jsonFile)
-
-	var p []pkgutils.OnePackage
-	if err := json.Unmarshal([]byte(theJSON), &p); err != nil {
-		panic(err)
-	}
-
-	return p
-}
 
 func main() {
 
@@ -80,7 +62,7 @@ func main() {
 		spdxPackages = append(spdxPackages, thePackage)
 	}
 
-	testPackages := load_test_json()
+	testPackages := pkgutils.LoadPackageJSON()
 
 	fmt.Println("\nSPDX Packages")
 	for _, i := range spdxPackages {
